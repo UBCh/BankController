@@ -2,7 +2,7 @@ package lec12;
 
 public class User {
 
-    private Info info;
+     private Info info;
     private Card card;
     private static long id = (long) (Math.random() * 999999999);
     private static String shortName;
@@ -42,4 +42,6 @@ public class User {
         card = new Card();
         card.setCard();
     }
+
+
 }

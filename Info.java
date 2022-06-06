@@ -22,7 +22,17 @@ public class Info {
         this.address.cetAddress(scanner);
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public String getSurname() {
+        return surname;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
 }
 
 
