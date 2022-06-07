@@ -5,24 +5,27 @@ public class Bank {
 
     static final String bankPassword = "myPassword";
 
+     public static boolean password(String password){
+         if (password.equals(bankPassword)){ return true;}
+         else {
+             System.out.println("Wrong password");
+             return false;
+         }
+     }
 
-    public static void addUser(String password) {
-        if (password.equals(bankPassword)) {
-            User user = User.createUser();
+
+
+
+    public static void addUser() {
+           User user = User.createUser();
             var mapUser = DataBD.hashmapAdd(user);
             System.out.print(mapUser.entrySet());
-        } else {
-            System.out.println("Wrong password");
-        }
+
     }
 
-    public static void getDataUsers(String password) {
-        if (password.equals(bankPassword)) {
-
-            System.out.println(DataBD.mapUser.entrySet());
-        }
-        System.out.println("пароль неверный");
-    }
+    public static void getDataUsers() {
+        System.out.println(DataBD.mapUser.entrySet());
+           }
 
     public static User lookForId(long id) {
         if (DataBD.mapUser.containsKey(id)) {

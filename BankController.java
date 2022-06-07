@@ -1,14 +1,53 @@
 package lec12;
 
+import java.util.HashMap;
+import java.util.Scanner;
+
+import static java.lang.System.*;
+
 public class BankController {
 
     public static void main(String[] args) {
-        Bank.addUser("myPassword");
+        Scanner scanner = new Scanner(in);
+        if (!Bank.password("myPassword")) {
+            for (int i = 0; i < 3; i++) {
+                out.println("Для доступа введите пароль:");
+
+                String tmp = scanner.nextLine();
+                if (Bank.password(tmp)) {
+                    break;
+                } else {
+                    System.exit(1);
+                }
+            }
+        } else {
+            System.out.println("выбор функции");
+        }
+        String[] menu = {"1-добавить клиента банка", "2-выполнить транзакцию", "3-найти клиента банка по id", "4-клиента банка по фамилии","5- вывести всю базу клиентов в консоль"};
+        for (String s:menu){System.out.println(s);}
+        switch (scanner.nextInt()) {
+            case 1:Bank.addUser(); break;
+            case 2: System.out.println("введите номер карты, с которой хотите сделать перевод");
+            int numberCard1=scanner.nextInt();
+                System.out.println("введите номер карты, на которую хотите сделать перевод");
+                int numberCard2=scanner.nextInt();
+                System.out.println("введите сумму, на которую хотите сделать перевод");
+                int summa=scanner.nextInt();
+            transferBetweenCards(numberCard1,numberCard2,summa); break;
+            case 3: System.out.println("введите номер id пользователя, которого хотите найти");
+              long id=scanner.nextInt();
+              userIdLookup(id); break;
+            case 4:System.out.println("введите фамилию пользователя, которого хотите найти");
+               String surName=scanner.nextLine();
+               searchBySurname(surName); break;
+            case 5:outputToConsoleAllUsers(); break;
+
+        }
 
     }
 
     public static void outputToConsoleAllUsers() {
-        Bank.getDataUsers("myPassword");
+        Bank.getDataUsers();
     }
 
 
@@ -16,9 +55,9 @@ public class BankController {
 
         User result = Bank.lookForId(id);
         if (result == null) {
-            System.out.println("id не найден");
+            out.println("id не найден");
         } else {
-            System.out.println(result);
+            out.println(result);
         }
 
     }
@@ -26,10 +65,10 @@ public class BankController {
     public static void searchBySurname(String surname) {
         var result = Bank.lookForSurName(surname);
         if (result != null) {
-            System.out.println(result);}
+            out.println(result);}
            }
     public static void transferBetweenCards(long id1, long id2,int summa){
-        Bank.getDataUsers("myPassword");
+        Bank.getDataUsers();
         Bank.transfer(id1,id2,summa);
 
     }

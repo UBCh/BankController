@@ -18,7 +18,7 @@ public class DataBD {
     }
 
     public static RandomAccess LostSurname(String surname) {
-        ArrayList<User> users = (ArrayList<User>) mapUser.values();
+        Collection<User> users = mapUser.values();
         ArrayList<User> resultArrayList= new ArrayList<>();
         for (User tmp : users) {
             var infoUser = tmp.getInfo();
