@@ -4,21 +4,20 @@ import java.util.*;
 
 
 public class DataBD {
-    private static User user;
+
 
     public DataBD() {
     }
-    static HashMap<Long, User> mapUser = new HashMap<Long, User>();
 
 
-    public static HashMap<Long, User> hashmapAdd(User user) {
+    public static HashMap hashmapAdd(User user, HashMap mapUser) {
         Long key = user.getId();
         mapUser.put(key, user);
         return mapUser;
     }
 
     public static RandomAccess LostSurname(String surname) {
-        Collection<User> users = mapUser.values();
+        Collection<User> users = Bank.mapUser.values();
         ArrayList<User> resultArrayList= new ArrayList<>();
         for (User tmp : users) {
             var infoUser = tmp.getInfo();
@@ -39,8 +38,8 @@ public class DataBD {
     }
 
     public static int[] refill(long id1, long id2, int summa) {
-        User user1=mapUser.get(id1);
-        User user2=mapUser.get(id2);
+        User user1=Bank.mapUser.get(id1);
+        User user2=Bank.mapUser.get(id2);
         var cardUser1 = user1.getCard();
         var cardUser2 = user2.getCard();
         var balansNumber1=cardUser1.getMoney();

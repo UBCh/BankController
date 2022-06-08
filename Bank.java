@@ -1,8 +1,10 @@
 package lec12;
 
+import java.util.HashMap;
+
 public class Bank {
 
-
+    static HashMap<Long, User> mapUser;
     static final String bankPassword = "myPassword";
 
      public static boolean password(String password){
@@ -15,21 +17,25 @@ public class Bank {
 
 
 
+    public static void setMapUser(HashMap mapUser) {
+        Bank.mapUser = mapUser;
+    }
 
     public static void addUser() {
+         var tmp= new HashMap<>(); ;
            User user = User.createUser();
-            var mapUser = DataBD.hashmapAdd(user);
-            System.out.print(mapUser.entrySet());
+           setMapUser( DataBD.hashmapAdd(user,tmp));
+           System.out.print(mapUser.toString());
 
     }
 
     public static void getDataUsers() {
-        System.out.println(DataBD.mapUser.entrySet());
+        System.out.println(mapUser.entrySet());
            }
 
     public static User lookForId(long id) {
-        if (DataBD.mapUser.containsKey(id)) {
-            return DataBD.mapUser.get(id);
+        if (mapUser.containsKey(id)) {
+            return mapUser.get(id);
         }
         return null;
     }
