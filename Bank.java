@@ -1,10 +1,10 @@
 package lec12;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Bank {
 
-    static HashMap<Long, User> mapUser;
+
     static final String bankPassword = "myPassword";
 
      public static boolean password(String password){
@@ -17,44 +17,41 @@ public class Bank {
 
 
 
-    public static void setMapUser(HashMap mapUser) {
-        Bank.mapUser = mapUser;
-    }
+
 
     public static void addUser() {
-         var tmp= new HashMap<>(); ;
-           User user = User.createUser();
-           setMapUser( DataBD.hashmapAdd(user,tmp));
-           System.out.print(mapUser.toString());
+         User user=new User();
+          user=User.createUser();
+           DataBD.hashmapAdd(user);
+           System.out.print(DataBD.mapUser.toString());
 
     }
 
     public static void getDataUsers() {
-        System.out.println(mapUser.entrySet());
+        System.out.println(DataBD.mapUser.entrySet());
            }
 
     public static User lookForId(long id) {
-        if (mapUser.containsKey(id)) {
-            return mapUser.get(id);
+        if (DataBD.mapUser.containsKey(id)) {
+            return DataBD.mapUser.get(id);
         }
         return null;
     }
 
-    public static User lookForSurName(String surname) {
-        String lost = surname;
-        var result = DataBD.LostSurname(surname);
+    public static ArrayList<User> lookForSurName(String surname) {
+        ArrayList<User> result = DataBD.LostSurname(surname);
         if (result == null) {
             System.out.println("пользователь не найден");
             return null;
         }
-        return (User) result;
+        return  result;
 
     }
 
 
     public static void transfer(long id1, long id2, int summa) {
         var result = DataBD.refill(id1, id2, summa);
-        System.out.println("выполнен перевод с карты пользователя с id " + id1 + ",баланс карты" + result[0] + "на карту пользователя с id" + id2 + "баланс карты" + result[1]);
+        System.out.println("выполнен перевод с карты номер " + id1 + " , баланс карты " + result[0] + "на карту номер " + id2 + " баланс карты " + result[1]);
     }
 
 

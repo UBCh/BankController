@@ -1,7 +1,5 @@
 package lec12;
 
-import java.util.Scanner;
-
 
 public class Card {
 
@@ -21,7 +19,11 @@ public class Card {
         return money;
     }
 
-    public void setMoney(int money) {
-        this.money = money;
+    public void setMoney(int babki) {
+        money = babki;
+    }
+
+    public long getCardNumber() {
+        return cardNumber;
     }
 }

@@ -1,5 +1,6 @@
 package lec12;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -21,27 +22,42 @@ public class BankController {
                 }
             }
         } else {
-            System.out.println("выбор функции");
-        }
-        String[] menu = {"1-добавить клиента банка", "2-выполнить транзакцию", "3-найти клиента банка по id", "4-клиента банка по фамилии","5- вывести всю базу клиентов в консоль"};
-        for (String s:menu){System.out.println(s);}
-        switch (scanner.nextInt()) {
-            case 1:Bank.addUser(); break;
-            case 2: System.out.println("введите номер карты, с которой хотите сделать перевод");
-            int numberCard1=scanner.nextInt();
-                System.out.println("введите номер карты, на которую хотите сделать перевод");
-                int numberCard2=scanner.nextInt();
-                System.out.println("введите сумму, на которую хотите сделать перевод");
-                int summa=scanner.nextInt();
-            transferBetweenCards(numberCard1,numberCard2,summa); break;
-            case 3: System.out.println("введите номер id пользователя, которого хотите найти");
-              long id=scanner.nextInt();
-              userIdLookup(id); break;
-            case 4:System.out.println("введите фамилию пользователя, которого хотите найти");
-               String surName=scanner.nextLine();
-               searchBySurname(surName); break;
-            case 5:outputToConsoleAllUsers(); break;
 
+                System.out.println("выбор функции");}
+                while (true) {
+                    String[] menu = {"1-добавить клиента банка", "2-выполнить транзакцию", "3-найти клиента банка по id", "4-клиента банка по фамилии", "5- вывести всю базу клиентов в консоль","100-остановить программу"};
+            for (String s : menu) {
+                System.out.println(s);
+            }
+            switch (scanner.nextInt()) {
+                case 1:
+                    Bank.addUser();
+                    break;
+                case 2:
+                    System.out.println("введите номер карты, с которой хотите сделать перевод");
+                    int numberCard1 = scanner.nextInt();
+                    System.out.println("введите номер карты, на которую хотите сделать перевод");
+                    int numberCard2 = scanner.nextInt();
+                    System.out.println("введите сумму, на которую хотите сделать перевод");
+                    int summa = scanner.nextInt();
+                    transferBetweenCards(numberCard1, numberCard2, summa);
+                    break;
+                case 3:
+                    System.out.println("введите номер id пользователя, которого хотите найти");
+                    long id = scanner.nextInt();
+                    userIdLookup(id);
+                    break;
+                case 4:
+                    System.out.println("введите фамилию пользователя, которого хотите найти");
+                     String surname = scanner.nextLine();
+                    searchBySurname(surname);
+                    break;
+                case 5:
+                    outputToConsoleAllUsers();
+                    break;
+                case 100:   System.exit(1);
+
+            }
         }
 
     }
@@ -55,7 +71,7 @@ public class BankController {
 
         User result = Bank.lookForId(id);
         if (result == null) {
-            out.println("id не найден");
+            out.println("пользователь не найден");
         } else {
             out.println(result);
         }
@@ -63,14 +79,16 @@ public class BankController {
     }
 
     public static void searchBySurname(String surname) {
-        var result = Bank.lookForSurName(surname);
+        ArrayList<User> result = Bank.lookForSurName(surname);
         if (result != null) {
-            out.println(result);}
-           }
-    public static void transferBetweenCards(long id1, long id2,int summa){
-        Bank.getDataUsers();
-        Bank.transfer(id1,id2,summa);
+            System.out.println(result);}}
 
+
+
+           public static void transferBetweenCards(long id1, long id2,int summa){
+        id1=DataBD.ownerSearchByCardNumber(id1);
+        id2=DataBD.ownerSearchByCardNumber(id2);
+        Bank.transfer(id1,id2,summa);
     }
 
 

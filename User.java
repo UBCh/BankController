@@ -4,8 +4,8 @@ public class User {
 
      private Info info;
     private Card card;
-    private static long id = (long) (Math.random() * 999999999);
-    private static String shortName;
+    private  long id = (long) (Math.random() * 999999999);
+    private  String shortName;
 
     User() {
     }
@@ -18,11 +18,11 @@ public class User {
         return card;
     }
 
-    public static long getId() {
+    public  long getId() {
         return id;
     }
 
-    public static String getShortName() {
+    public  String getShortName() {
         return shortName;
     }
 
