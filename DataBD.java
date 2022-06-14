@@ -21,18 +21,15 @@ public class DataBD {
         ArrayList<User> resultArrayList= new ArrayList<>();
         for (User tmp : users) {
             var infoUser = tmp.getInfo();
-             ;
-            if ((infoUser.getSurname()).equals(surname)) {
+             if ((infoUser.getSurname()).equals(surname)) {
                 resultArrayList.add(tmp);
-                        }
+                        }}
             if (resultArrayList.isEmpty()){ return null;}
             else { return resultArrayList;}
 
         }
 
 
-        return null;
-    }
 
     public static Long ownerSearchByCardNumber(long cardNumber1) {
         Collection<User> users = mapUser.values();

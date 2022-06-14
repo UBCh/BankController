@@ -49,7 +49,7 @@ public class BankController {
                     break;
                 case 4:
                     System.out.println("введите фамилию пользователя, которого хотите найти");
-                     String surname = scanner.nextLine();
+                     String surname = scanner.next();
                     searchBySurname(surname);
                     break;
                 case 5:
